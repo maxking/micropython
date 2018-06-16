@@ -10,3 +10,6 @@ Scripts for my experiments with micropython board (NodeMCU) and neopixel.
 - [Micropython webrepl](http://micropython.org/webrepl/)
 - [esptool.py](https://pypi.org/project/esptool/)
 
+# Demo
+
+![NeoPixel Demo](gifs/neopixel.gif)
