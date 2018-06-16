@@ -13,3 +13,12 @@ Scripts for my experiments with micropython board (NodeMCU) and neopixel.
 # Demo
 
 ![NeoPixel Demo](gifs/neopixel.gif)
+
+
+## Code
+
+```python
+>>> from neopixel_helpers import np_setup, rainbow
+>>> np = np_setup()
+>>> rainbow(np)
+```
