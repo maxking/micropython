@@ -1,14 +1,18 @@
 import time
 
-RED = (0x10, 0, 0)
-YELLOW = (0x10, 0x10, 0)
-GREEN = (0, 0x10, 0)
-AQUA = (0, 0x10, 0x10)
-BLUE = (0, 0, 0x10)
-PURPLE = (0x10, 0, 0x10)
-BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
+AQUA = (0, 255, 255)
+BLUE = (0, 0, 255)
+PURPLE = (148, 0, 211)
+INDIGO = (75, 0, 130)
+ORANGE = (255, 127, 0)
 
-COLORS = (RED, YELLOW, GREEN, AQUA, BLUE, PURPLE, BLACK)
+COLORS = (RED, YELLOW, GREEN, AQUA, BLUE, PURPLE)
+
+RAINBOWS = (PURPLE, INDIGO, BLUE, GREEN, YELLOW, ORANGE, RED)
+
 
 def cycle(np, color, num=4):
     import time
@@ -36,7 +40,7 @@ def bounce(np, color):
 
 def fade_in_out(np, color):
     n = np.n
-    for i in range(0, 4 * 256, 8):
+    for i in range(0, 4 * 256, n):
         for j in range(n):
             if (i // 256) % 2 == 0:
                 val = i & 0xff
@@ -52,7 +56,21 @@ def clear(np, color=(0, 0, 0)):
         np[i] = color
     np.write()
 
-def np_setup():
+
+def np_setup(pin_no=12, num_pixels=12):
     import neopixel, machine
-    np = neopixel.NeoPixel(machine.Pin(12), 12)
+    np = neopixel.NeoPixel(machine.Pin(pin_no), num_pixels)
     return np
+
+
+def clear(np):
+    np.fill((0, 0, 0))
+    np.write()
+
+
+def rainbow(np, wait=0.5):
+    for color in RAINBOWS:
+        np.fill(color)
+        np.write()
+        time.sleep(wait)
+    clear(np)
